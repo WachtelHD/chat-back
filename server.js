@@ -1,10 +1,24 @@
 require("dotenv").config();
 
 const mongoose = require("mongoose");
-mongoose.connect(process.env.DATABASE, {
-  useUnifiedTopology: true,
-  useNewUrlParser: true,
-});
+
+const clientOptions = { serverApi: { version: '1', strict: true, deprecationErrors: true } };
+
+async function run() {
+  try {
+    // Connect to the MongoDB cluster
+    await mongoose.connect(
+      process.env.DATABASE, clientOptions
+    );
+    await mongoose.connection.db.admin().command({ ping: 1 });
+    console.log("Pinged your deployment. You successfully connected to MongoDB!");
+  } finally {
+    // Ensures that the client will close when you finish/error
+    await mongoose.disconnect();
+  }
+}
+
+run().catch(console.dir);
 
 mongoose.connection.on("error", (err) => {
   console.log("Mongoose Connection ERROR: " + err.message);

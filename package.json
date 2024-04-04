@@ -15,7 +15,10 @@
     "express": "^4.17.3",
     "js-sha256": "^0.9.0",
     "jwt-then": "^1.0.1",
-    "mongoose": "^5.9.9",
+    "mongodb": "^6.5.0",
+    "mongoose": "^7.0.0",
+    "node.js": "^0.0.1-security",
+    "nodemon": "^3.1.0",
     "socket.io": "^2.5.0",
     "socket.io-p2p-server": "^1.2.0"
   }
